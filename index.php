@@ -23,7 +23,6 @@ class CKeksScriptInserter {
 	            add_action( 'init', [ $this, 'ckeks_enqueue_my_scripts' ], - 999 );
             }else
             {
-                echo("action print ccm script ");
                 add_action( 'init', [$this , 'ckeks_print_ccm_script']);
             }
         }
@@ -42,8 +41,6 @@ class CKeksScriptInserter {
     }
     public function ckeks_print_ccm_script() {
 
-        echo( "printing ccm tag " );
-
         $ccmTag = $this->get_integration_url($this->CKeksScriptKey);
         if ( $ccmTag ) {
 
@@ -59,7 +56,7 @@ class CKeksScriptInserter {
         wp_enqueue_script('keks_admin', plugins_url( 'js/ckeks_admin.js', __FILE__ ) );
         wp_enqueue_style('keks', plugins_url( 'keks.css', __FILE__ ) );
     }
-    //Todo sollte auch eine ccm variante bekommen denk ich
+
     public function ckeks_shortcode_cookietable() {
         return '<script id="clickskeks-disclaimer-script" src="https://static.clickskeks.at/'.$this->CKeksScriptKey.'/disclaimer.js" type="application/javascript"></script>';
     }
