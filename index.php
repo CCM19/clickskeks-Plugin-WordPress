@@ -6,20 +6,27 @@
     Author: CLICKSKEKS GMBH & CO KG
     Version: 1.2.1
 */
-
+//5f97f8ca-704f-45a2-9627-a85ca89e3ff4
 class CKeksScriptInserter {
     
     protected $CKeksScriptKey = '';
-    
+
+    public $wp_magic_quotes = false;
     public function __construct() {
         
         $this->CKeksScriptKey = get_option('ckeks_script_key');
-        
-        if( $this->CKeksScriptKey && ( !is_admin() && !$this->ckeks_is_login_page() ) )
+
+
+	    if( $this->CKeksScriptKey && ( !is_admin() && !$this->ckeks_is_login_page() ) )
         {
-            add_action( 'init', [ $this, 'ckeks_enqueue_my_scripts' ], -999 );
+            if( $this -> ckeks_handle_ccm( $this -> CKeksScriptKey ) ) {
+	            add_action( 'init', [ $this, 'ckeks_enqueue_my_scripts' ], - 999 );
+            }else
+            {
+                echo("action print ccm script ");
+                add_action( 'init', [$this , 'ckeks_print_ccm_script']);
+            }
         }
-        
         add_action( 'admin_menu', [ $this, 'ckeks_create_plugin_settings_page' ] );
         add_action( 'admin_enqueue_scripts', [ $this, 'ckeks_enqueue_my_admin_scripts' ] );
         
@@ -33,12 +40,26 @@ class CKeksScriptInserter {
     public function ckeks_enqueue_my_scripts() {
         wp_enqueue_script('keks', 'https://static.clickskeks.at/'.$this->CKeksScriptKey.'/bundle.js' );
     }
-    
+    public function ckeks_print_ccm_script() {
+
+        echo( "printing ccm tag " );
+
+        $ccmTag = $this->get_integration_url($this->CKeksScriptKey);
+        if ( $ccmTag ) {
+
+		    wp_print_script_tag( [
+			    'src'            => $ccmTag,
+			    'referrerpolicy' => 'origin'
+		    ] );
+
+	    }
+    }
+
     public function ckeks_enqueue_my_admin_scripts() {
         wp_enqueue_script('keks_admin', plugins_url( 'js/ckeks_admin.js', __FILE__ ) );
         wp_enqueue_style('keks', plugins_url( 'keks.css', __FILE__ ) );
     }
-    
+    //Todo sollte auch eine ccm variante bekommen denk ich
     public function ckeks_shortcode_cookietable() {
         return '<script id="clickskeks-disclaimer-script" src="https://static.clickskeks.at/'.$this->CKeksScriptKey.'/disclaimer.js" type="application/javascript"></script>';
     }
@@ -83,7 +104,7 @@ class CKeksScriptInserter {
     
                 <label for="ckeks_script_key"><strong><?php _e('Bitte geben Sie hier Ihren Clickskeks Code ein!', 'clickskeks'); ?></strong></label>
                 <br/>
-                <input name="ckeks_script_key" id="ckeks_script_key" type="text" value="<?php echo get_option('ckeks_script_key'); ?>" style="" class="regular-text" />&nbsp;
+                <textarea name="ckeks_script_key" id="ckeks_script_key" cols="100" rows="2"><?php echo get_option('ckeks_script_key'); ?></textarea>
                 <input type="submit" name="submit_code" id="submit_code" class="keks-btn" value="Code speichern">
                 <input type="submit" name="reset" id="reset" class="keks-btn" value="Zurücksetzen">
                 <br/>
@@ -91,7 +112,7 @@ class CKeksScriptInserter {
             </form>
         </div> <?php
     }
-    
+
     public function ckeks_handle_form() {
         if( ! isset( $_POST['script_add_form'] ) || ! wp_verify_nonce( $_POST['script_add_form'], 'script_update' )
         ){ ?>
@@ -100,27 +121,45 @@ class CKeksScriptInserter {
             </div> <?php
             exit;
         } else {
-            
+
             $successText = '';
-            
+
             if( isset( $_POST['submit_type']) && $_POST['submit_type'] == 'reset' )
             {
                 $scriptKey = '';
                 $successText = 'Erfolgreich zurückgesetzt.';
             } elseif( isset( $_POST['submit_type'] ) && $_POST['submit_type'] == 'submit' )
             {
-                $scriptKey = sanitize_text_field( $_POST['ckeks_script_key'] );
+                //stripslashes_deep is crucial because of legacy wp core magic quotes adding slashes
+                $scriptKey = stripslashes_deep( $_POST['ckeks_script_key'] );
                 $successText = 'Der Code wurde erfolgreich gespeichert.';
             }
-            
+
             update_option( 'ckeks_script_key', $scriptKey );
-            
             ?>
             <div class="updated" style="margin-left: 0">
                 <p> <?php echo $successText; ?> </p>
             </div> <?php
-            
         }
     }
+
+    /** decides if input is ccm or ckekks */
+    public function ckeks_handle_ccm($scriptKey) {
+	    return preg_match_all( "/\w-/", $scriptKey ) === 4;
+    }
+
+    private function get_integration_url($scriptKey)
+	{
+
+		if ( ! empty( $scriptKey ) ) {
+			$match = [];
+			preg_match( '/\bsrc=([\'"])((?>[^"\'?#]|(?!\1)["\'])*\/(ccm19|app)\.js\?(?>[^"\']|(?!\1).)*)\1/i', $scriptKey, $match );
+			if ( $match and $match[2] ) {
+				return html_entity_decode( $match[2], ENT_HTML401 | ENT_QUOTES, 'UTF-8' );
+			}
+		}
+
+		return null;
+	}
 }
 new CKeksScriptInserter();
