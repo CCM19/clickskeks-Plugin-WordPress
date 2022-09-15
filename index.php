@@ -48,7 +48,12 @@ class CKeksScriptInserter {
 			    'referrerpolicy' => 'origin'
 		    ] );
 
-	    }
+	    }else{
+	        ?>
+            <div class="error" style="margin-left: 0">
+                <p><?php __('Der eingebene CCM19 Code war leider Falsch. Bitte versuchen Sie es erneut oder wenden sich an den Support.', 'clickskeks'); ?></p>
+            </div> <?php
+        }
     }
 
     public function ckeks_enqueue_my_admin_scripts() {
@@ -147,7 +152,7 @@ class CKeksScriptInserter {
     public function ckeks_handle_ccm($scriptKey) {
 	    return preg_match_all( "/\w-/", $scriptKey ) === 4;
     }
-
+    /** checks if ccm19 snippet is correct */
     private function get_integration_url($scriptKey)
 	{
 
