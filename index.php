@@ -139,7 +139,7 @@ class CKeksScriptInserter {
             update_option( 'ckeks_script_key', $scriptKey );
             ?>
             <div class="updated" style="margin-left: 0">
-                <p> <?php echo $responseText; ?> </p>
+                <p> <?php echo _e($responseText); ?> </p>
             </div> <?php
         }
     }
