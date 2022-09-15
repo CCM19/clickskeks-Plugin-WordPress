@@ -122,23 +122,27 @@ class CKeksScriptInserter {
             exit;
         } else {
 
-            $successText = '';
+            $responseText = '';
 
             if( isset( $_POST['submit_type']) && $_POST['submit_type'] == 'reset' )
             {
                 $scriptKey = '';
-                $successText = 'Erfolgreich zurückgesetzt.';
+                $responseText = 'Erfolgreich zurückgesetzt.';
             } elseif( isset( $_POST['submit_type'] ) && $_POST['submit_type'] == 'submit' )
             {
                 //stripslashes_deep is crucial because of legacy wp core magic quotes adding slashes
                 $scriptKey = stripslashes_deep( $_POST['ckeks_script_key'] );
-                $successText = 'Der Code wurde erfolgreich gespeichert.';
+                if(!empty($scriptKey)){
+	                $responseText = 'Der Code wurde erfolgreich gespeichert.';
+                }else{
+                    $responseText = 'Bitte Code-Schnipsel eingeben.';
+                }
             }
 
             update_option( 'ckeks_script_key', $scriptKey );
             ?>
             <div class="updated" style="margin-left: 0">
-                <p> <?php echo $successText; ?> </p>
+                <p> <?php echo $responseText; ?> </p>
             </div> <?php
         }
     }
