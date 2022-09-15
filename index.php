@@ -105,7 +105,8 @@ class CKeksScriptInserter {
     
                 <label for="ckeks_script_key"><strong><?php _e('Bitte geben Sie hier Ihren Clickskeks Code ein!', 'clickskeks'); ?></strong></label>
                 <br/>
-                <textarea name="ckeks_script_key" id="ckeks_script_key" cols="100" rows="2"><?php echo get_option('ckeks_script_key'); ?></textarea>
+                <textarea name="ckeks_script_key" id="ckeks_script_key" cols="100" rows="2" placeholder='<script src="http://Beispiel/ccm19.js?apiKey=1234&domain=1234"
+          referrerpolicy="origin"></script> oder 5f97f8ca-704f-45a2-9627-a85ca89e3ff4'><?php echo get_option('ckeks_script_key'); ?></textarea>
                 <input type="submit" name="submit_code" id="submit_code" class="keks-btn" value="Code speichern">
                 <input type="submit" name="reset" id="reset" class="keks-btn" value="Zurücksetzen">
                 <br/>
