@@ -11,7 +11,6 @@ class CKeksScriptInserter {
     
     protected $CKeksScriptKey = '';
 
-    public $wp_magic_quotes = false;
     public function __construct() {
         
         $this->CKeksScriptKey = get_option('ckeks_script_key');
