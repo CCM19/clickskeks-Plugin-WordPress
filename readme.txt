@@ -1,7 +1,7 @@
 === clickskeks.at Cookiebanner ===
 Tags: cookie, gdpr, dsgvo, cookie Banner, cookie bar
 Requires at least: 4.9
-Tested up to: 5.8
+Tested up to: 6.0.*
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,3 +37,4 @@ Please find our answers to your FAQs here: https://www.clickskeks.at/so-gehts/fa
 03.12.2020 - Version 1.1 - Short code for privacy policy
 15.04.2021 - Version 1.2 - Fix Warning in Backend
 20.04.2021 - Version 1.2.1 - Fix Warnings in Backend
+14.10.2022 . Version 1.3.1 - Added CCM19 integration
