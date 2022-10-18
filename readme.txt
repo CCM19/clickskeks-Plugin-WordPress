@@ -11,12 +11,13 @@ The clickskeks cookie management plugin gives you full control over your cookies
 == Description ==
 clickskeks – let’s make your website GDPR compliant!
 
-The clickskeks cookie management plugin gives you full control over your cookies and trackers on your website. We first scan your website and identify your cookies. Afterwards your GDPR compliant cookie banner will be created, which enables your users to opt in.
-The clickskeks plugin regularly and automatically checks your website for new cookies. We will immediately inform you when adjustments are necessary. Check out your new cookie banner 30 days for free and you can continue to use it from just 4.90 EUR per month.
+The clickskeks cookie management plugin gives you full control over your cookies and trackers on your website. We first scan your website and identify your cookies.
+Find out more at clickskeks.at or at ccm19.de.
 
 Get yourself 30 days for free at clickskeks.at!
 
-If you have any questions, please contact hallo@clickskeks.at
+If you have any questions, please contact hallo@clickskeks.at.
+
 
 
 == Installation ==

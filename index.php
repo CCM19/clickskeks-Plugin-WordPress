@@ -3,10 +3,10 @@
 /*
     Plugin Name: Clickskeks
     description: Clickskeks
-    Author: CLICKSKEKS GMBH & CO KG
-    Version: 1.2.1
+    Author: Papoo Software & Media Gmbh
+    Version: 1.3.1
 */
-//5f97f8ca-704f-45a2-9627-a85ca89e3ff4
+
 class CKeksScriptInserter {
     
     protected $CKeksScriptKey = '';
