@@ -4,7 +4,7 @@
     Plugin Name: Clickskeks
     description: Clickskeks
     Author: Papoo Software & Media Gmbh
-    Version: 1.3.1
+    Version: 1.3.2
 */
 
 class CKeksScriptInserter {
@@ -34,11 +34,16 @@ class CKeksScriptInserter {
     public function ckeks_is_login_page() {
         return in_array( $GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php') );
     }
-    
+
     public function ckeks_enqueue_my_scripts() {
         wp_enqueue_script('keks', 'https://static.clickskeks.at/'.$this->CKeksScriptKey.'/bundle.js' );
     }
 
+	/**
+	 * @return void
+     *
+     * prints the ccm19 script into the header of the website
+	 */
     public function ckeks_print_ccm_script() {
 
         $ccmTag = $this->get_integration_url($this->CKeksScriptKey);
@@ -52,7 +57,7 @@ class CKeksScriptInserter {
 	    }else{
 	        ?>
             <div class="error" style="margin-left: 0">
-                <p><?php __('Der eingegebene CCM19 Code war leider falsch. Bitte versuchen Sie es erneut oder wenden sich an den Support.', 'clickskeks'); ?></p>
+                <p><?php __('Der eingegebene CCM19 Code-Schnipsel war leider falsch. Bitte versuchen Sie es erneut oder wenden sich an den Support.', 'clickskeks'); ?></p>
             </div> <?php
         }
     }
@@ -95,8 +100,8 @@ class CKeksScriptInserter {
                 <?php wp_nonce_field( 'script_update', 'script_add_form' ); ?>
                 <br/>
                 <strong style="font-size: 1rem"><?php _e('clickskeks - gemeinsam gegen DSGVO Strafen', 'clickskeks'); ?></strong>
-                <p><?php _e('Das clickskeks Cookie-Management-Plugin aus Österreich gibt dir die volle Kontrolle über Cookies und Tracker auf deiner Website. Nach einem Erstscan deiner Website werden Cookies identifiziert und dein DSGVO-konformer Cookie-Banner erstellt, welcher deinen Usern die gesetzlich vorgeschriebene aktive Einwilligung zu Cookies ermöglicht.', 'clickskeks'); ?></p>
-                <p><?php _e('clickskeks überprüft daraufhin regelmäßig und automatisch deine Seite auf neue oder veränderte Cookies und informiert dich, wenn Anpassungen notwendig sind. Du kannst clickskeks 30 Tage kostenlos testen und erhältst anschließend dein Cookie-Tool ab nur 9,90 EUR im Monat.', 'clickskeks'); ?></p>
+                <p><?php _e('Das clickskeks Cookie-Management-Plugin aus Österreich gibt dir die volle Kontrolle über Cookies und Tracker auf deiner Website. Nach einem Erst-scan deiner Website werden Cookies identifiziert und dein DSGVO-konformer Cookie-Banner erstellt, welcher deinen Usern die gesetzlich vorgeschriebene aktive Einwilligung zu Cookies ermöglicht.', 'clickskeks'); ?></p>
+                <p><?php _e('Clickskeks überprüft daraufhin regelmäßig und automatisch deine Seite auf neue oder veränderte Cookies und informiert dich, wenn Anpassungen notwendig sind. Du kannst clickskeks 30 Tage kostenlos testen und erhältst anschließend dein Cookie-Tool ab nur 9,90 EUR im Monat.', 'clickskeks'); ?></p>
                 <p><?php _e('Deinen 30 Tage Test kannst du auf <a href="https://www.clickskeks.at/">clickskeks.at</a> bekommen!', 'clickskeks'); ?></p>
                 <p><?php _e('Bei Fragen wende dich bitte an <a href="mailto:hallo@clickskeks.at">hallo@clickskeks.at</a>', 'clickskeks'); ?></p>
                 
@@ -104,7 +109,7 @@ class CKeksScriptInserter {
                 <p><?php _e('Damit deine Website DSGVO-konform ist, musst du die Cookies auch in deiner Datenschutzerklärung anführen. <br/>Gehe dazu auf deine Datenschutz-Seite zu dem Abschnitt "Cookies" und füge hier den Shortcode <b style="color:#000;">[clickskeks]</b> ein. Speichere die Änderungen und schon werden deine gesetzten Cookies als Tabelle angezeigt.', 'clickskeks'); ?></p>
                 <img src="<?php echo plugins_url( 'img/screenshot.png', __FILE__ ); ?>" style="display:block;max-width:100%;height:auto;margin:0 0 40px;padding:10px;border:1px solid #7e8993;" width="634" height="141" />
     
-                <label for="ckeks_script_key"><strong><?php _e('Bitte geben Sie hier Ihren Clickskeks Code ein!', 'clickskeks'); ?></strong></label>
+                <label for="ckeks_script_key"><strong><?php _e('Bitte geben Sie hier Ihren clickskeks oder CCM19 Code ein!', 'clickskeks'); ?></strong></label>
                 <br/>
                 <textarea name="ckeks_script_key" id="ckeks_script_key" cols="100" rows="2" placeholder='<script src="http://Beispiel/ccm19.js?apiKey=1234&domain=1234"
           referrerpolicy="origin"></script> oder 5f97f8ca-704f-45a2-9627-a85ca89e3ff4'><?php echo get_option('ckeks_script_key'); ?></textarea>
@@ -152,9 +157,9 @@ class CKeksScriptInserter {
 
     /** decides if input is ccm or ckekks */
     public function ckeks_handle_ccm($scriptKey) {
-	    //return preg_match_all( "/\w-/", $scriptKey ) === 4;
 	    return (bool)preg_match('~^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$~', $scriptKey);
     }
+
     /** checks if ccm19 snippet is correct */
     private function get_integration_url($scriptKey)
 	{

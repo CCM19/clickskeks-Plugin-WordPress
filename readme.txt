@@ -38,4 +38,5 @@ Please find our answers to your FAQs here: https://www.clickskeks.at/so-gehts/fa
 03.12.2020 - Version 1.1 - Short code for privacy policy
 15.04.2021 - Version 1.2 - Fix Warning in Backend
 20.04.2021 - Version 1.2.1 - Fix Warnings in Backend
-14.10.2022 . Version 1.3.1 - Added CCM19 integration
+14.10.2022 - Version 1.3.1 - Added CCM19 integration
+21.10.2022 - Version 1.3.2 - Fix Warnings in Frontend
