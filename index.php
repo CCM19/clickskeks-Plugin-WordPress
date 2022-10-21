@@ -38,6 +38,7 @@ class CKeksScriptInserter {
     public function ckeks_enqueue_my_scripts() {
         wp_enqueue_script('keks', 'https://static.clickskeks.at/'.$this->CKeksScriptKey.'/bundle.js' );
     }
+
     public function ckeks_print_ccm_script() {
 
         $ccmTag = $this->get_integration_url($this->CKeksScriptKey);
@@ -51,7 +52,7 @@ class CKeksScriptInserter {
 	    }else{
 	        ?>
             <div class="error" style="margin-left: 0">
-                <p><?php __('Der eingebene CCM19 Code war leider Falsch. Bitte versuchen Sie es erneut oder wenden sich an den Support.', 'clickskeks'); ?></p>
+                <p><?php __('Der eingegebene CCM19 Code war leider falsch. Bitte versuchen Sie es erneut oder wenden sich an den Support.', 'clickskeks'); ?></p>
             </div> <?php
         }
     }
@@ -151,7 +152,8 @@ class CKeksScriptInserter {
 
     /** decides if input is ccm or ckekks */
     public function ckeks_handle_ccm($scriptKey) {
-	    return preg_match_all( "/\w-/", $scriptKey ) === 4;
+	    //return preg_match_all( "/\w-/", $scriptKey ) === 4;
+	    return (bool)preg_match('~^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$~', $scriptKey);
     }
     /** checks if ccm19 snippet is correct */
     private function get_integration_url($scriptKey)
