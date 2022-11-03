@@ -22,7 +22,7 @@ class CKeksScriptInserter {
 	            add_action( 'init', [ $this, 'ckeks_enqueue_my_scripts' ], - 999 );
             }else
             {
-                add_action( 'init', [$this , 'ckeks_print_ccm_script']);
+                add_action('wp_head', [$this , 'ckeks_print_ccm_script'], -10);
             }
         }
         add_action( 'admin_menu', [ $this, 'ckeks_create_plugin_settings_page' ] );
