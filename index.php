@@ -3,7 +3,7 @@
 /*
     Plugin Name: Clickskeks
     description: Clickskeks
-    Author: Papoo Software & Media Gmbh
+    Author: Papoo Software & Media GmbH
     Version: 1.3.2
 */
 
