@@ -4,7 +4,7 @@
     Plugin Name: Clickskeks
     description: Clickskeks
     Author: Papoo Software & Media GmbH
-    Version: 1.3.2
+    Version: 1.3.3
 */
 
 class CKeksScriptInserter {
@@ -18,7 +18,7 @@ class CKeksScriptInserter {
 
 	    if( $this->CKeksScriptKey && ( !is_admin() && !$this->ckeks_is_login_page() ) )
         {
-            if( $this -> ckeks_handle_ccm( $this -> CKeksScriptKey ) ) {
+            if( $this -> ckeks_check_snippet( $this -> CKeksScriptKey ) ) {
 	            add_action( 'init', [ $this, 'ckeks_enqueue_my_scripts' ], - 999 );
             }else
             {
@@ -156,7 +156,7 @@ class CKeksScriptInserter {
     }
 
     /** decides if input is ccm or ckekks */
-    public function ckeks_handle_ccm($scriptKey) {
+    public function ckeks_check_snippet($scriptKey) {
 	    return (bool)preg_match('~^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$~', $scriptKey);
     }
 

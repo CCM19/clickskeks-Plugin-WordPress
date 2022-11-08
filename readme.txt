@@ -1,4 +1,5 @@
 === clickskeks.at Cookiebanner ===
+Contributors: ccm19
 Tags: cookie, gdpr, dsgvo, cookie Banner, cookie bar
 Requires at least: 4.9
 Tested up to: 6.0.*
@@ -12,7 +13,7 @@ The clickskeks cookie management plugin gives you full control over your cookies
 clickskeks – let’s make your website GDPR compliant!
 
 The clickskeks cookie management plugin gives you full control over your cookies and trackers on your website. We first scan your website and identify your cookies.
-Find out more at clickskeks.at or at ccm19.de.
+Find out more at clickskeks.at.
 
 Get yourself 30 days for free at clickskeks.at!
 
@@ -36,7 +37,8 @@ Please find our answers to your FAQs here: https://www.clickskeks.at/so-gehts/fa
 == Changelog ==
 28.11.2020 - Version 1.0
 03.12.2020 - Version 1.1 - Short code for privacy policy
-15.04.2021 - Version 1.2 - Fix Warning in Backend
-20.04.2021 - Version 1.2.1 - Fix Warnings in Backend
+15.04.2021 - Version 1.2 - Fix Warning in backend
+20.04.2021 - Version 1.2.1 - Fix Warnings in backend
 14.10.2022 - Version 1.3.1 - Added CCM19 integration
-21.10.2022 - Version 1.3.2 - Fix Warnings in Frontend
+21.10.2022 - Version 1.3.2 - Fix Warnings in frontend
+08.11.2022 - Version 1.3.3 - Fix script placement
