@@ -2,8 +2,8 @@
 Contributors: ccm19
 Tags: cookie, gdpr, dsgvo, cookie Banner, cookie bar
 Requires at least: 5.*
-Tested up to: 6.2
-Stable tag: 1.3.5
+Tested up to: 6.5
+Stable tag: 1.3.6
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -45,3 +45,4 @@ Please find our answers to your FAQs here: https://www.clickskeks.at/so-gehts/fa
 08.11.2022 - Version 1.3.3 - Fix script placement
 24.01.2023 - Version 1.3.4 - Minor Fixes
 30.03.2023 - Version 1.3.5 - Change to WP6.2
+27.10.2023 - Version 1.3.6 - Change to WP6.5

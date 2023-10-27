@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
         e.preventDefault();
         
-        if ( document.querySelector('input[name=submit_type]').value == 'reset' ) {
+        if ( document.querySelector('input[name=submit_type]').value === 'reset' ) {
             if( confirm('Sind Sie sicher?') )
             {
                 keksForm.submit();
