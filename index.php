@@ -3,7 +3,7 @@
 /**
     Plugin Name: Clickskeks
     description: Integrates the Clickskeks DSGVO solution into WordPress
-    Version: 1.3.6
+    Version: 1.4.0
     Author: Papoo Software &amp; Media GmbH
     Author URI: https://papoo-media.de
     License: GPLv2 or later
@@ -35,27 +35,14 @@ class CKeksScriptInserter {
         $this->CKeksScriptKey = get_option('ckeks_script_key');
 
 
-	    if( $this->CKeksScriptKey && ( !is_admin() && !$this->ckeks_is_login_page() ) )
+	    if( $this->CKeksScriptKey && !is_admin()  )
         {
-            if( $this -> ckeks_check_snippet( $this -> CKeksScriptKey ) ) {
-	            add_action( 'init', [ $this, 'ckeks_enqueue_my_scripts' ], - 999 );
-            }else
-            {
-                add_action('wp_head', [$this , 'ckeks_print_ccm_script'], -10);
-            }
+	        add_action('wp_head', [$this , 'ckeks_print_ccm_script'], -10);
         }
         add_action( 'admin_menu', [ $this, 'ckeks_create_plugin_settings_page' ] );
         add_action( 'admin_enqueue_scripts', [ $this, 'ckeks_enqueue_my_admin_scripts' ] );
         
         add_shortcode('clickskeks', [ $this, 'ckeks_shortcode_cookietable' ]);
-    }
-    
-    public function ckeks_is_login_page() {
-        return in_array( $GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php') );
-    }
-
-    public function ckeks_enqueue_my_scripts() {
-        wp_enqueue_script('keks', 'https://static.clickskeks.at/'.$this->CKeksScriptKey.'/bundle.js' );
     }
 
 	/**
@@ -73,7 +60,7 @@ class CKeksScriptInserter {
 			    'referrerpolicy' => 'origin'
 		    ] );
 
-	    }else{
+	    }elseif($ccmTag === null){
 	        ?>
             <div class="error" style="margin-left: 0">
                 <p><?php __('Der eingegebene CCM19 Code-Schnipsel war leider falsch. Bitte versuchen Sie es erneut oder wenden sich an den Support.', 'clickskeks'); ?></p>
@@ -159,10 +146,12 @@ class CKeksScriptInserter {
             {
                 //stripslashes_deep is crucial because of legacy wp core magic quotes adding slashes
                 $scriptKey = stripslashes_deep( $_POST['ckeks_script_key'] );
-                if(!empty($scriptKey)){
+                if(!empty($scriptKey) && !empty($this->get_integration_url($scriptKey))){
 	                $responseText = 'Der Code wurde erfolgreich gespeichert.';
-                }else{
+                }elseif(empty($scriptKey)){
                     $responseText = 'Bitte Code-Schnipsel eingeben.';
+                }elseif (empty($this->get_integration_url($scriptKey))){
+                    $responseText = 'Der eingegeben Code ist leider Falsch. Bitte überprüfen Sie Ihre eingabe oder wenden Sie sich an den Support.';
                 }
             }
 
@@ -174,18 +163,13 @@ class CKeksScriptInserter {
         }
     }
 
-    /** decides if input is ccm or ckekks */
-    public function ckeks_check_snippet($scriptKey) {
-	    return (bool)preg_match('~^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$~', $scriptKey);
-    }
-
     /** checks if ccm19 snippet is correct */
     private function get_integration_url($scriptKey)
 	{
 
 		if ( ! empty( $scriptKey ) ) {
 			$match = [];
-			preg_match( '/\bsrc=([\'"])((?>[^"\'?#]|(?!\1)["\'])*\/(ccm19|app)\.js\?(?>[^"\']|(?!\1).)*)\1/i', $scriptKey, $match );
+			preg_match( '/\bsrc=([\'"])((?>[^"\'?#]|(?!\1)["\'])*\/(ccm19|app|bundle)\.js\?(?>[^"\']|(?!\1).)*)\1/i', $scriptKey, $match );
 			if ( $match and $match[2] ) {
 				return html_entity_decode( $match[2], ENT_HTML401 | ENT_QUOTES, 'UTF-8' );
 			}
