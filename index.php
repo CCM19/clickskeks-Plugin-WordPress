@@ -3,7 +3,7 @@
 /**
     Plugin Name: Clickskeks
     description: Integrates the Clickskeks DSGVO solution into WordPress
-    Version: 1.4.0
+    Version: 1.4.1
     Author: Papoo Software &amp; Media GmbH
     Author URI: https://papoo-media.de
     License: GPLv2 or later
@@ -35,13 +35,12 @@ class CKeksScriptInserter {
         $this->CKeksScriptKey = get_option('ckeks_script_key');
 
 
-	    if( $this->CKeksScriptKey && !is_admin()  )
+	    if( $this->CKeksScriptKey && !is_admin() && ! is_customize_preview()  )
         {
 	        add_action('wp_head', [$this , 'ckeks_print_ccm_script'], -10);
         }
-        add_action( 'admin_menu', [ $this, 'ckeks_create_plugin_settings_page' ] );
-        add_action( 'admin_enqueue_scripts', [ $this, 'ckeks_enqueue_my_admin_scripts' ] );
-        
+        add_action( 'admin_menu', [ $this, 'ckeks_enqueue_my_admin_scripts' ] );
+
         add_shortcode('clickskeks', [ $this, 'ckeks_shortcode_cookietable' ]);
     }
 
@@ -69,7 +68,15 @@ class CKeksScriptInserter {
     }
 
     public function ckeks_enqueue_my_admin_scripts() {
-        wp_enqueue_script('keks_admin', plugins_url( 'js/ckeks_admin.js', __FILE__ ) );
+	    add_menu_page(
+                __('Clickskeks', 'Clickskeks'),
+            __('Clickskesk','Cklickskeks'),
+            'manage_options',
+             'clickskeks',
+		     [$this, 'ckeks_plugin_settings_page_content'],
+            'dashicons-keks',
+            100
+        );
         wp_enqueue_style('keks', plugins_url( 'keks.css', __FILE__ ) );
     }
 
@@ -77,25 +84,12 @@ class CKeksScriptInserter {
         return '<script id="clickskeks-disclaimer-script" src="https://static.clickskeks.at/'.$this->CKeksScriptKey.'/disclaimer.js" type="application/javascript"></script>';
     }
     
-    public function ckeks_create_plugin_settings_page() {
-        // Add the menu item and page
-        $page_title = 'Clickskeks';
-        $menu_title = 'Clickskeks';
-        $capability = 'manage_options';
-        $slug = 'clickskeks';
-        $callback = array( $this, 'ckeks_plugin_settings_page_content' );
-        $icon = 'dashicons-keks';
-        $position = 100;
-        
-        add_menu_page( $page_title, $menu_title, $capability, $slug, $callback, $icon, $position );
-    }
-    
     public function ckeks_plugin_settings_page_content() {
         
         if( (isset($_POST['updated'])) && ($_POST['updated'] === 'true') ){
             $this->ckeks_handle_form();
         }
-        
+	    wp_enqueue_script( 'ckeks_admin_script', plugin_dir_url( __FILE__ ) . '/js/ckeks_admin.js', array( 'jquery' ), '1.0', true );
         ?>
         <div class="wrap clickskeks" style="background: white; padding: 1rem">
             <img src="<?php echo plugins_url( 'img/logo.png', __FILE__ ); ?>" style="width: 220px;">
