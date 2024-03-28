@@ -3,7 +3,7 @@
 /**
     Plugin Name: Clickskeks
     description: Integrates the Clickskeks DSGVO solution into WordPress
-    Version: 1.4.1
+    Version: 1.4.2
     Author: Papoo Software &amp; Media GmbH
     Author URI: https://papoo-media.de
     License: GPLv2 or later
@@ -70,7 +70,7 @@ class CKeksScriptInserter {
     public function ckeks_enqueue_my_admin_scripts() {
 	    add_menu_page(
                 __('Clickskeks', 'Clickskeks'),
-            __('Clickskesk','Cklickskeks'),
+            __('Clickskeks','Cklickskeks'),
             'manage_options',
              'clickskeks',
 		     [$this, 'ckeks_plugin_settings_page_content'],
