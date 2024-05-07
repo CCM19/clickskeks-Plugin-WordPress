@@ -3,7 +3,7 @@ Contributors: ccm19
 Tags: cookie, gdpr, dsgvo, cookie Banner, cookie bar
 Requires at least: 5.*
 Tested up to: 6.5
-Stable tag: 1.4.2
+Stable tag: 1.4.3
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -49,3 +49,4 @@ Please find our answers to your FAQs here: https://www.clickskeks.at/so-gehts/fa
 28.02.2024 - Version 1.4.0 - Added Bundle support and User feedback for Inputs
 04.03.2024 - Version 1.4.1 - Fix an issue with the js enquement
 28.03.2024 . Version 1.4.2 - Menu naming Typo fix
+07.05.2024 . Version 1.4.3 - Deleted old text prompt for Ckeks ID insert
