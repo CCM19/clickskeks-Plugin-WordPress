@@ -3,7 +3,7 @@
 /**
     Plugin Name: Clickskeks
     description: Integrates the Clickskeks DSGVO solution into WordPress
-    Version: 1.4.3
+    Version: 1.4.5
     Author: Papoo Software &amp; Media GmbH
     Author URI: https://papoo-media.de
     License: GPLv2 or later
@@ -91,6 +91,10 @@ class CKeksScriptInserter {
         }
 	    wp_enqueue_script( 'ckeks_admin_script', plugin_dir_url( __FILE__ ) . '/js/ckeks_admin.js', array( 'jquery' ), '1.0', true );
         ?>
+
+	    <?php
+	    $html_code = '<div class="ccm-cookie-declaration">Bitte aktivieren Sie Javascript, um die Liste aller deklarierten Cookies und ähnlicher Techniken zu sehen.</div>';
+        ?>
         <div class="wrap clickskeks" style="background: white; padding: 1rem">
             <img src="<?php echo plugins_url( 'img/logo.png', __FILE__ ); ?>" style="width: 220px;">
             
@@ -106,9 +110,9 @@ class CKeksScriptInserter {
                 <p><?php _e('Bei Fragen wende dich bitte an <a href="mailto:hallo@clickskeks.at">hallo@clickskeks.at</a>', 'clickskeks'); ?></p>
                 
                 <h2 style="margin-top:40px;font-size: 1rem"><?php _e('Cookie-Einbindung in deine Datenschutzerklärung', 'clickskeks'); ?></h2>
-                <p><?php _e('Damit deine Website DSGVO-konform ist, musst du die Cookies auch in deiner Datenschutzerklärung anführen. <br/>Gehe dazu auf deine Datenschutz-Seite zu dem Abschnitt "Cookies" und füge hier den Shortcode <b style="color:#000;">[clickskeks]</b> ein. Speichere die Änderungen und schon werden deine gesetzten Cookies als Tabelle angezeigt.', 'clickskeks'); ?></p>
-                <img src="<?php echo plugins_url( 'img/screenshot.png', __FILE__ ); ?>" style="display:block;max-width:100%;height:auto;margin:0 0 40px;padding:10px;border:1px solid #7e8993;" width="634" height="141" />
-    
+                <p><?php _e('Verwenden Sie den folgenden Code in Ihrer Datenschutzerklärung oder einer ähnlichen Seite an der Stelle, an der die Liste aller konfigurierten Einbettungen und Cookies erscheinen soll. Der Platzhalter wird mit den Cookie-Erklärungs-Liste gefüllt, sobald CCM19 geladen wurde. Die Anzeigesprache wird automatisch vom Browser des Besuchers ermittelt.','clickskeks'); ?></p>
+                <p><code><?php echo htmlspecialchars($html_code); ?></code></p>
+
                 <label for="ckeks_script_key"><strong><?php _e('Bitte geben Sie hier Ihren clickskeks oder CCM19 Code ein!', 'clickskeks'); ?></strong></label>
                 <br/>
                 <textarea name="ckeks_script_key" id="ckeks_script_key" cols="100" rows="2" placeholder='<script src="http://Beispiel/ccm19.js?apiKey=1234&domain=1234"
@@ -118,7 +122,8 @@ class CKeksScriptInserter {
                 <br/>
                 <br/>
             </form>
-        </div> <?php
+        </div>
+	    <?php
     }
 
     public function ckeks_handle_form() {
