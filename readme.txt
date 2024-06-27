@@ -18,7 +18,7 @@ Find out more at clickskeks.at.
 
 Get yourself 30 days for free at clickskeks.at!
 
-If you have any questions, please contact hallo@clickskeks.at.
+If you have any questions, please contact info@ccm19.de.
 
 
 
@@ -26,8 +26,7 @@ If you have any questions, please contact hallo@clickskeks.at.
 1. Download and install!
 2. Start your 30-day free trial at clickkeks.at!
 3. Enter and save the clickskeks code!
-4. Insert the short code [clickskeks] into your privacy policy!
-5. Check out your new cookie banner!
+4. Check out your new cookie banner!
 
 == Frequently Asked Questions ==
 Please find our answers to your FAQs here: https://www.clickskeks.at/so-gehts/faqs
@@ -52,3 +51,4 @@ Please find our answers to your FAQs here: https://www.clickskeks.at/so-gehts/fa
 07.05.2024 - Version 1.4.3 - Deleted old text prompt for Ckeks ID insert
 07.05.2024 - Version 1.4.4 - Svn complications
 10.05.2024 - Version 1.4.5 - removed Shortcode
+27.06.2024 - Version 1.4.6 - changed Readme and Contributors
