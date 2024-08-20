@@ -52,3 +52,4 @@ Please find our answers to your FAQs here: https://www.clickskeks.at/so-gehts/fa
 07.05.2024 - Version 1.4.4 - Svn complications
 10.05.2024 - Version 1.4.5 - removed Shortcode
 27.06.2024 - Version 1.4.6 - changed Readme and Contributors
+20.08.2024 - Version 1.4.7 - Minor Typo changes

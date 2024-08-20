@@ -62,7 +62,7 @@ class CKeksScriptInserter {
 	    }elseif($ccmTag === null){
 	        ?>
             <div class="error" style="margin-left: 0">
-                <p><?php __('Der eingegebene CCM19 Code-Schnipsel war leider falsch. Bitte versuchen Sie es erneut oder wenden sich an den Support.', 'clickskeks'); ?></p>
+                <p><?php __('Der eingegebene Clickskeks Code-Schnipsel war leider falsch. Bitte versuchen Sie es erneut oder wenden sich an den Support.', 'clickskeks'); ?></p>
             </div> <?php
         }
     }
@@ -105,15 +105,15 @@ class CKeksScriptInserter {
                 <br/>
                 <strong style="font-size: 1rem"><?php _e('clickskeks - gemeinsam gegen DSGVO Strafen', 'clickskeks'); ?></strong>
                 <p><?php _e('Das clickskeks Cookie-Management-Plugin aus Österreich gibt dir die volle Kontrolle über Cookies und Tracker auf deiner Website. Nach einem Erst-scan deiner Website werden Cookies identifiziert und dein DSGVO-konformer Cookie-Banner erstellt, welcher deinen Usern die gesetzlich vorgeschriebene aktive Einwilligung zu Cookies ermöglicht.', 'clickskeks'); ?></p>
-                <p><?php _e('Clickskeks überprüft daraufhin regelmäßig und automatisch deine Seite auf neue oder veränderte Cookies und informiert dich, wenn Anpassungen notwendig sind. Du kannst clickskeks 30 Tage kostenlos testen und erhältst anschließend dein Cookie-Tool ab nur 9,90 EUR im Monat.', 'clickskeks'); ?></p>
+                <p><?php _e('Clickskeks überprüft daraufhin regelmäßig und automatisch deine Seite auf neue oder veränderte Cookies und informiert dich, wenn Anpassungen notwendig sind. Du kannst clickskeks 30 Tage kostenlos testen und erhältst anschließend dein Cookie-Tool ab nur 5,90 EUR im Monat.', 'clickskeks'); ?></p>
                 <p><?php _e('Deinen 30 Tage Test kannst du auf <a href="https://www.clickskeks.at/">clickskeks.at</a> bekommen!', 'clickskeks'); ?></p>
                 <p><?php _e('Bei Fragen wende dich bitte an <a href="mailto:hallo@clickskeks.at">hallo@clickskeks.at</a>', 'clickskeks'); ?></p>
                 
                 <h2 style="margin-top:40px;font-size: 1rem"><?php _e('Cookie-Einbindung in deine Datenschutzerklärung', 'clickskeks'); ?></h2>
-                <p><?php _e('Verwenden Sie den folgenden Code in Ihrer Datenschutzerklärung oder einer ähnlichen Seite an der Stelle, an der die Liste aller konfigurierten Einbettungen und Cookies erscheinen soll. Der Platzhalter wird mit den Cookie-Erklärungs-Liste gefüllt, sobald CCM19 geladen wurde. Die Anzeigesprache wird automatisch vom Browser des Besuchers ermittelt.','clickskeks'); ?></p>
+                <p><?php _e('Verwenden Sie den folgenden Code in Ihrer Datenschutzerklärung oder einer ähnlichen Seite an der Stelle, an der die Liste aller konfigurierten Einbettungen und Cookies erscheinen soll. Der Platzhalter wird mit den Cookie-Erklärungs-Liste gefüllt, sobald Clickskeks geladen wurde. Die Anzeigesprache wird automatisch vom Browser des Besuchers ermittelt.','clickskeks'); ?></p>
                 <p><code><?php echo htmlspecialchars($html_code); ?></code></p>
 
-                <label for="ckeks_script_key"><strong><?php _e('Bitte geben Sie hier Ihren clickskeks oder CCM19 Code ein!', 'clickskeks'); ?></strong></label>
+                <label for="ckeks_script_key"><strong><?php _e('Bitte geben Sie hier Ihren clickskeks Code ein!', 'clickskeks'); ?></strong></label>
                 <br/>
                 <textarea name="ckeks_script_key" id="ckeks_script_key" cols="100" rows="2" placeholder='<script src="http://Beispiel/ccm19.js?apiKey=1234&domain=1234"
           referrerpolicy="origin"></script>'><?php echo get_option('ckeks_script_key'); ?></textarea>
