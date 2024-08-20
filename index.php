@@ -3,7 +3,7 @@
 /**
     Plugin Name: Clickskeks
     description: Integrates the Clickskeks DSGVO solution into WordPress
-    Version: 1.4.6
+    Version: 1.4.7
     Author: Papoo Software &amp; Media GmbH
     Author URI: https://papoo-media.de
     License: GPLv2 or later
