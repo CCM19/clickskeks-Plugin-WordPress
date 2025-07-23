@@ -2,8 +2,8 @@
 Contributors: Papoo Software & Media GmbH
 Tags: cookie, gdpr, dsgvo, cookie Banner, cookie bar
 Requires at least: 5.*
-Tested up to: 6.5
-Stable tag: 1.4.7
+Tested up to: 6.8
+Stable tag: 1.4.9
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -53,3 +53,5 @@ Please find our answers to your FAQs here: https://www.clickskeks.at/so-gehts/fa
 10.05.2024 - Version 1.4.5 - removed Shortcode
 27.06.2024 - Version 1.4.6 - changed Readme and Contributors
 20.08.2024 - Version 1.4.7 - Minor Typo changes
+28.10.2024 - Version 1.4.8 - Change to WP 6.7
+23.07.2024 - Version 1.4.9 - Compatibilty fix for external Customizer Plugins
