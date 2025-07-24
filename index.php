@@ -34,15 +34,28 @@ class CKeksScriptInserter {
 
 		$this->CKeksScriptKey = get_option( 'ckeks_script_key' );
 
+		$is_thrive_editor   = (
+			( isset( $_GET['tve'] ) && $_GET['tve'] === 'true' ) ||
+			( isset( $_GET['tcbf'] ) && $_GET['tcbf'] === 'true' )
+		);
+		$is_iframe          = isset( $_SERVER['Sec-Fetch-Dest'] ) && $_SERVER['Sec-Fetch-Dest'] === 'iframe';
+		$is_admin_area      = is_admin();
+		$is_customizer      = is_customize_preview();
+		$has_valid_referrer = empty( $_SERVER['HTTP_REFERER'] ) || strpos( $_SERVER['HTTP_REFERER'], '/wp-admin/' ) === false;
 
-		if ( $this->CKeksScriptKey && ! is_admin() && ! is_customize_preview()
-             && ( empty( $_SERVER['HTTP_REFERER'] ) || strpos( $_SERVER['HTTP_REFERER'], '/wp-admin/' ) === false )
-             && (! strpos( $_SERVER['Sec-Fetch-Dest'],'iframe'))
-        ) {
+		$should_add_script = (
+			$this->CKeksScriptKey &&
+			! $is_admin_area &&
+			! $is_customizer &&
+			$has_valid_referrer &&
+			! $is_thrive_editor &&
+			! $is_iframe
+		);
+
+		if ( $should_add_script ) {
 			add_action( 'wp_head', [ $this, 'ckeks_print_ccm_script' ], - 10 );
 		}
 		add_action( 'admin_menu', [ $this, 'ckeks_enqueue_my_admin_scripts' ] );
-
 		add_shortcode( 'clickskeks', [ $this, 'ckeks_shortcode_cookietable' ] );
 	}
 
